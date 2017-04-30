@@ -3,6 +3,7 @@
 <head>
 	<title>Movie Review</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+ 	<link rel="stylesheet" type="text/css" href="movieReview.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   	<script src="movieReview.js"></script>
 </head>
@@ -16,13 +17,16 @@
 			</div>
 		</nav>
 		<div> 
-			<input type="search" ng-model="search">
+			<input type="search" ng-model="search" placeholder="Enter full movie name" autofocus/>
 			<button ng-click="getItems()">Search</button> 
 		</div>
-		<div>
+		<div class="movie-details" ng-if="movies.Response==='True'">
 			<ul>
-				<li ng-repeat="item in items">{{item}}</li>
+				<li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}</li>
 			</ul>
+		</div>
+		<div ng-if="movies.Response==='False'">
+			No results found!
 		</div>
 	</div>
 </body>

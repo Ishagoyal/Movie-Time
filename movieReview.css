@@ -1,0 +1,18 @@
+ul{
+	list-style-type: none;
+}
+
+.movie-poster{
+	width: 150px;
+	float: left;
+	margin-right: 10px;
+}
+
+.movie-details{
+	margin-top: 50px;
+	margin-left: 30px;
+}
+
+.movie-title{
+	font-size: 20px;
+}

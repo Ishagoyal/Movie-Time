@@ -1,21 +1,26 @@
 (function () {
 	// body...
+	'use strict';
 	var app = angular.module('movieReviewApp', []);
 	app.controller('movieReviewController', function ($scope,$http) {
 		// body...
 		$scope.title = "Movie Time";
-		$scope.items = [];
 		$scope.getItems = function(){
 
-			$http({method:'GET',url:'http://www.omdbapi.com/?s=' + $scope.search})
-			.then(function mySucess(response) {
+			$http({method:'GET',url:"https://www.omdbapi.com/?t=" + $scope.search + "&tomatoes=true&plot=full"})
+			.then(function (response) {
 				// body...
-				$scope.items = response.data;
-			},
-			function myError(response) {
+				$scope.movies = response.data;
+		
+	    	});
+
+
+			$http({method:'GET',url:"https://www.omdbapi.com/?s=" + $scope.search})
+			.then(function (response) {
 				// body...
-				$scope.items = response.statusText;
-			});
+				$scope.relatedMovies = response.data;
+			
+		    });
 		};
 	});
 })();
