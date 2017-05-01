@@ -20,14 +20,33 @@
 			<input type="search" ng-model="search" placeholder="Enter full movie name" autofocus/>
 			<button ng-click="getItems()">Search</button> 
 		</div>
-		<div class="movie-details" ng-if="movies.Response==='True'">
-			<ul>
-				<li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}</li>
-			</ul>
-		</div>
-		<div ng-if="movies.Response==='False'">
+		<div class="row">
+		    <div class="movie-details col-sm-8" ng-if="movies.Response==='True'">
+			    <ul>
+				    <li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}</li>
+				    <!-- <li ng-repeat="movie in movies">{{movie}}</li -->
+				    <li><span>Released On: </span>{{movies.Released}}</li>
+				    <li><span>Runtime: </span>{{movies.Runtime}}</li>
+				    <li><span>Genre: </span>{{movies.Genre}}</li>
+				    <li><span>Director: </span>{{movies.Director}}</li>
+				    <li><span>Writers: </span>{{movies.Writer}}</li>
+				    <li><span>Actors: </span>{{movies.Actors}}</li>
+				    <li>{{movies.Plot}}</li>
+				    <li><span>Language: </span>{{movies.Language}}</li>
+				    <li><span>Country: </span>{{movies.Country}}</li>
+				    <li><span>Awards: </span>{{movies.Awards}}</li>
+			    </ul>
+			</div>
+			<div ng-if="movies.Response==='False'">
 			No results found!
+		    </div>
+			<div class="col-sm-4" ng-if="relatedMovies.Response==='True'">
+				<ul>
+					<li>{{relatedMovies.Title}}</li>
+				</ul>
+			</div>
 		</div>
+		
 	</div>
 </body>
 </html>
