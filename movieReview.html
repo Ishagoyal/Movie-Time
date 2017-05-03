@@ -3,6 +3,7 @@
 <head>
 	<title>Movie Review</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
  	<link rel="stylesheet" type="text/css" href="movieReview.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   	<script src="movieReview.js"></script>
@@ -16,7 +17,8 @@
 				</div>
 			</div>
 		</nav>
-		<div> 
+		<div class = "searchBar"> 
+		    <h4>Enter the movie name you want to search!</h4><br>
 			<input type="search" ng-model="search" placeholder="Enter full movie name" autofocus/>
 			<button ng-click="getItems()">Search</button> 
 		</div>
@@ -35,6 +37,7 @@
 				    <li><span>Language: </span>{{movies.Language}}</li>
 				    <li><span>Country: </span>{{movies.Country}}</li>
 				    <li><span>Awards: </span>{{movies.Awards}}</li>
+				    <li><span>IMDB Ratings: </span>{{movies.imdbRating}}</li>
 			    </ul>
 			</div>
 			<div ng-if="movies.Response==='False'">
