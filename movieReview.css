@@ -3,13 +3,26 @@ body{
 	background-color: #a4e3a1;
 }
 
-.searchBar{
+.search-bar{
 	margin-left: 40px;
 	margin-top: 50px;
+	
 }
 
-ul{
+input{
+	
+	width: 200px;
+	height: 30px;
+	
+}
+
+
+.details{
 	list-style-type: none;
+}
+
+.related{
+	list-style-type: circle;
 }
 
 .movie-poster{
@@ -31,4 +44,18 @@ ul{
 span{
 	color: rgb(34,127,163);
 	font-size:18px;
+}
+.bar-style {
+  background: #337AB7;
+  color: rgb(250, 250, 250);
+  display: inline;
+  
+}
+
+.links{
+	background-color: #3fa8bf;
+	color: rgb(250, 250, 250);
+	padding: 3px;
+	border-radius: 8%;
+	margin-left: 10px;
 }

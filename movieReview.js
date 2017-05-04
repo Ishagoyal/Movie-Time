@@ -5,7 +5,13 @@
 	app.controller('movieReviewController', function ($scope,$http) {
 		// body...
 		$scope.title = "Movie Time";
-		$scope.getItems = function(){
+		$scope.$watch('search',function(){
+          getItems();
+		});
+
+		
+
+		 function getItems(){
 
 			$http({method:'GET',url:"https://www.omdbapi.com/?t=" + $scope.search + "&tomatoes=true&plot=full"})
 			.then(function (response) {
@@ -21,6 +27,12 @@
 				$scope.relatedMovies = response.data;
 			
 		    });
-		};
+		}
+
+		$scope.update = function (film) {
+			// body...
+			$scope.search = film.Title;
+			
+		}
 	});
 })();

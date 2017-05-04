@@ -17,14 +17,15 @@
 				</div>
 			</div>
 		</nav>
-		<div class = "searchBar"> 
+		<div class = "input-group search-bar"> 
 		    <h4>Enter the movie name you want to search!</h4><br>
-			<input type="search" ng-model="search" placeholder="Enter full movie name" autofocus/>
-			<button ng-click="getItems()">Search</button> 
+			<input type="search" ng-model="search" ng-model-options= "{debounce:1000}" placeholder="Enter full movie name" autofocus/>
+			<span class="input-group-addon bar-style"><i class="glyphicon glyphicon-search"></i></span>
+			
 		</div>
 		<div class="row">
 		    <div class="movie-details col-sm-8" ng-if="movies.Response==='True'">
-			    <ul>
+			    <ul class="details">
 				    <li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}</li>
 				    <!-- <li ng-repeat="movie in movies">{{movie}}</li -->
 				    <li><span>Released On: </span>{{movies.Released}}</li>
@@ -39,17 +40,25 @@
 				    <li><span>Awards: </span>{{movies.Awards}}</li>
 				    <li><span>IMDB Ratings: </span>{{movies.imdbRating}}</li>
 			    </ul>
+			    <br>
+			    <div>
+				  <a class="links" href="https://www.youtube.com/results?search_query={{movies.Title}}" target="_blank">Watch Trailers!</a>
+				  |<a class="links" href="https://subscene.com/subtitles/title?q={{movies.Title}}&l=" target="_blank">Get Subtitles!</a>
+				  |<a class="links" href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{movies.Title}}" target="_blank">Buy Online!</a>
+			    </div>
 			</div>
-			<div ng-if="movies.Response==='False'">
-			No results found!
+			<div class="no-results" ng-if="movies.Response==='False'">
+			<h4>No results found!</h4>
 		    </div>
-			<div class="col-sm-4" ng-if="relatedMovies.Response==='True'">
-				<ul>
-					<li>{{relatedMovies.Title}}</li>
+			<div class="col-sm-2 movie-details" ng-if="relatedMovies.Response==='True'">
+			    <span>Related Research: </span><br>
+				<ul class="reated">
+					<li ng-repeat="film in relatedMovies.Search" ng-click="update(film)"><a href="#">{{film.Title}}</a>, {{film.Year}}</li>
 				</ul>
 			</div>
 		</div>
 		
+					
 	</div>
 </body>
 </html>
