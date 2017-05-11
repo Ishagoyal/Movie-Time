@@ -9,7 +9,7 @@
           getItems();
 		});
 
-		
+          $scope.search = "3 idiots";
 
 		 function getItems(){
 
@@ -17,7 +17,28 @@
 			.then(function (response) {
 				// body...
 				$scope.movies = response.data;
-		
+				$scope.id = $scope.movies.imdbID;
+		        console.log($scope.id);
+
+		        $scope.reviews = [];
+		        $scope.review = {};
+
+		        $scope.addReview = function () {
+
+		        	this.review.createdOn = Date.now();
+		        	// body...
+		        	   this.reviews.push({id: $scope.id,
+		        						 userName: $scope.review.userName,		
+		        						 email: $scope.review.email,
+		        						 stars: $scope.review.stars,
+		        						 message: $scope.review.message,
+		        						 createdOn: $scope.review.createdOn
+		        						});
+		        	this.review = {};
+		        };
+
+		        console.log(this.reviews);
+		        
 	    	});
 
 
@@ -27,6 +48,8 @@
 				$scope.relatedMovies = response.data;
 			
 		    });
+
+
 		}
 
 		$scope.update = function (film) {
@@ -34,5 +57,12 @@
 			$scope.search = film.Title;
 			
 		}
+
+	         
+
 	});
+
+               
+
+
 })();

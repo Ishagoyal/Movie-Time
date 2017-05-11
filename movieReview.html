@@ -26,8 +26,7 @@
 		<div class="row">
 		    <div class="movie-details col-sm-8" ng-if="movies.Response==='True'">
 			    <ul class="details">
-				    <li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}</li>
-				    <!-- <li ng-repeat="movie in movies">{{movie}}</li -->
+				    <li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}  <span class="reviews"><a href="#Movie Reviews">Reviews | </a><a href="#Add Review">Add your own review</a></span></li>
 				    <li><span>Released On: </span>{{movies.Released}}</li>
 				    <li><span>Runtime: </span>{{movies.Runtime}}</li>
 				    <li><span>Genre: </span>{{movies.Genre}}</li>
@@ -57,8 +56,36 @@
 				</ul>
 			</div>
 		</div>
-		
-					
+			
+	</div>
+    <br>
+    <div id="movie-reviews" class="row">
+    	<div class="col-sm-8">
+    	<a name="Movie Reviews"></a>
+    	<h4>Reviews</h4>
+    	<span>User Name: {{review.userName}}</span><br>
+    	<span>Ratings: {{review.stars}}</span><br>
+    	<span>Review: {{review.message}}</span><br>
+    	<span>Email: {{review.email}}</span><br>
+        </div>
+    </div>
+    <br>
+	<div id="review-section" class="row">
+		<div class="col-sm-8">
+		<a name="Add Review"></a>
+		<h4>Add Review</h4>
+		<div class="form-group">
+
+			<input type="text" name="userName" ng-model="review.userName" class="form-control" placeholder="Your name"><br>
+			<select ng-model="review.stars" ng-options="stars for stars in [5,4,3,2,1]" class="form-control" required >
+				<option value="">Your rating</option>
+			</select><br>
+			<textarea ng-model="review.message" class="form-control" placeholder="Your review">
+			</textarea><br>
+			<input type="email" name="email" ng-model="review.email" class="form-control" placeholder="Your email address " required><br>
+			<input type="submit" name="submitReview" value="Submit Review" class="btn btn-primary pull-right" ng-click="addReview()">
+		</div>
+		</div>
 	</div>
 </body>
 </html>
