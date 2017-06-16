@@ -65,4 +65,10 @@ span{
 
 }
 
+#genres,#country,#credits{
+	display: inline;
+}
+
+
+
 

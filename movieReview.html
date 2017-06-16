@@ -24,26 +24,24 @@
 			
 		</div>
 		<div class="row">
-		    <div class="movie-details col-sm-8" ng-if="movies.Response==='True'">
-			    <ul class="details">
-				    <li><img ng-src="{{movies.Poster=='N/A' && 'http://placehold.it/150x220&text=N/A' || movies.Poster}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{movies.imdbID}}" target="_blank">{{movies.Title}}</a>, {{movies.Year}}  <span class="reviews"><a href="#Movie Reviews">Reviews | </a><a href="#Add Review">Add your own review</a></span></li>
-				    <li><span>Released On: </span>{{movies.Released}}</li>
-				    <li><span>Runtime: </span>{{movies.Runtime}}</li>
-				    <li><span>Genre: </span>{{movies.Genre}}</li>
-				    <li><span>Director: </span>{{movies.Director}}</li>
-				    <li><span>Writers: </span>{{movies.Writer}}</li>
-				    <li><span>Actors: </span>{{movies.Actors}}</li>
-				    <li>{{movies.Plot}}</li>
-				    <li><span>Language: </span>{{movies.Language}}</li>
-				    <li><span>Country: </span>{{movies.Country}}</li>
-				    <li><span>Awards: </span>{{movies.Awards}}</li>
-				    <li><span>IMDB Ratings: </span>{{movies.imdbRating}}</li>
+		    <div class="movie-details col-sm-8" >
+			    <ul class="details" ng-repeat="movies in moviesData">
+				    <li><img ng-src="{{movies.poster_path=='N/A' && 'http://placehold.it/150x220&text=N/A' || 'https://image.tmdb.org/t/p/w500/' + movies.poster_path}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{fullData.imdb_id}}" target="_blank">{{movies.original_title}}</a>  <span class="reviews"><a href="#Movie Reviews">Reviews | </a><a href="#Add Review">Add your own review</a></span></li>
+				    <li><span>Released On: </span>{{movies.release_date}}</li>
+				    <li><span>Runtime: </span>{{fullData.runtime}}</li>
+				    <li><span>Genre: </span><div id="genres" ng-repeat="genre in fullData.genres">{{genre.name}}, </div></li>
+				    <li><span>Crew: </span><strong>{{fullData.credits.crew[0].job}} = </strong>{{fullData.credits.crew[0].name}}, <strong>{{fullData.credits.crew[1].job}} = </strong>= {{fullData.credits.crew[1].name}}, <strong>{{fullData.credits.crew[2].job}} = </strong> {{fullData.credits.crew[2].name}}, <strong>{{fullData.credits.crew[3].job}} = </strong> {{fullData.credits.crew[3].name}}, <strong>{{fullData.credits.crew[4].job}} = </strong>{{fullData.credits.crew[4].name}}, <strong>{{fullData.credits.crew[5].job}} = </strong> {{fullData.credits.crew[5].name}}</li>
+				    <li><span>Cast: </span><div id="credits" ng-repeat="credit in fullData.credits.cast">{{credit.name}}, </div></li>
+				    <li><span>Overview: </span>{{movies.overview}}</li>
+				    <li><span>Language: </span>{{movies.original_language}}</li>
+				    <li><span>Country: </span><div id="country" ng-repeat="country in fullData.production_countries">{{country.name}}</div></li>
+				    
 			    </ul>
 			    <br>
-			    <div>
-				  <a class="links" href="https://www.youtube.com/results?search_query={{movies.Title}}" target="_blank">Watch Trailers!</a>
-				  |<a class="links" href="https://subscene.com/subtitles/title?q={{movies.Title}}&l=" target="_blank">Get Subtitles!</a>
-				  |<a class="links" href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{movies.Title}}" target="_blank">Buy Online!</a>
+			    <div ng-repeat="movies in moviesData">
+				  <a class="links" href="https://www.youtube.com/results?search_query={{movies.original_title}}" target="_blank">Watch Trailers!</a>
+				  |<a class="links" href="https://subscene.com/subtitles/title?q={{movies.original_title}}&l=" target="_blank">Get Subtitles!</a>
+				  |<a class="links" href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{movies.original_title}}" target="_blank">Buy Online!</a>
 			    </div>
 			</div>
 			<div class="no-results" ng-if="movies.Response==='False'">
@@ -59,14 +57,17 @@
 			
 	</div>
     <br>
+    <div ng-controller="reviewController">
     <div id="movie-reviews" class="row">
-    	<div class="col-sm-8">
+    	<div class="col-sm-8" ng-repeat="review in reviews">
+    	<div ng-if="movies.imdbID === review.id">
     	<a name="Movie Reviews"></a>
     	<h4>Reviews</h4>
     	<span>User Name: {{review.userName}}</span><br>
     	<span>Ratings: {{review.stars}}</span><br>
     	<span>Review: {{review.message}}</span><br>
     	<span>Email: {{review.email}}</span><br>
+        </div>
         </div>
     </div>
     <br>
@@ -76,16 +77,17 @@
 		<h4>Add Review</h4>
 		<div class="form-group">
 
-			<input type="text" name="userName" ng-model="review.userName" class="form-control" placeholder="Your name"><br>
+			<input type="text" name="userName" ng-model="review.userName" class="form-control" placeholder="Your name" autofocus /><br>
 			<select ng-model="review.stars" ng-options="stars for stars in [5,4,3,2,1]" class="form-control" required >
 				<option value="">Your rating</option>
 			</select><br>
 			<textarea ng-model="review.message" class="form-control" placeholder="Your review">
 			</textarea><br>
-			<input type="email" name="email" ng-model="review.email" class="form-control" placeholder="Your email address " required><br>
-			<input type="submit" name="submitReview" value="Submit Review" class="btn btn-primary pull-right" ng-click="addReview()">
+			<input type="email" name="email" ng-model="review.email" class="form-control" placeholder="Your email address " required/><br>
+			<input type="submit" name="submitReview" value="Submit Review" class="btn btn-primary pull-right" ng-click="addReview()"/>
 		</div>
 		</div>
+	</div>
 	</div>
 </body>
 </html>
