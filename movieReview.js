@@ -17,7 +17,7 @@
 			$http({method:'GET',url:"https://api.themoviedb.org/3/search/movie?api_key=9a1750d469929884b1c959126ec22c83&query=" + $scope.search})
 			.then(function (response) {
 				// body...
-				$scope.moviesData = response.data.results;
+				$scope.movies = response.data.results[0];
 				console.log(response.data.results[0]);
 				$scope.id=response.data.results[0].id;
 
@@ -39,19 +39,19 @@
 			
 
 
-			// $http({method:'GET',url:"https://www.omdbapi.com/?s=" + $scope.search})
-			// .then(function (response) {
-			// 	// body...
-			// 	$scope.relatedMovies = response.data;
-			
-		 //    });
+			$http({method:'GET',url:"https://api.themoviedb.org/3/search/movie?api_key=9a1750d469929884b1c959126ec22c83&query=" + $scope.search})
+			.then(function (response) {
+				// body...
+				$scope.relatedMovies = response.data.results;
+			    console.log(response.data.results);
+		    });
 
 
 		}
 
 		$scope.update = function (film) {
 			// body...
-			$scope.search = film.Title;
+			$scope.search = film.original_title;
 			
 		}
 

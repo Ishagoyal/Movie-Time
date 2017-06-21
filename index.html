@@ -25,12 +25,12 @@
 		</div>
 		<div class="row">
 		    <div class="movie-details col-sm-8" >
-			    <ul class="details" ng-repeat="movies in moviesData">
+			    <ul class="details">
 				    <li><img ng-src="{{movies.poster_path=='N/A' && 'http://placehold.it/150x220&text=N/A' || 'https://image.tmdb.org/t/p/w500/' + movies.poster_path}}" class="movie-poster thumbnail"><a class="movie-title" href="http://www.imdb.com/title/{{fullData.imdb_id}}" target="_blank">{{movies.original_title}}</a>  <span class="reviews"><a href="#Movie Reviews">Reviews | </a><a href="#Add Review">Add your own review</a></span></li>
 				    <li><span>Released On: </span>{{movies.release_date}}</li>
 				    <li><span>Runtime: </span>{{fullData.runtime}}</li>
 				    <li><span>Genre: </span><div id="genres" ng-repeat="genre in fullData.genres">{{genre.name}}, </div></li>
-				    <li><span>Crew: </span><strong>{{fullData.credits.crew[0].job}} = </strong>{{fullData.credits.crew[0].name}}, <strong>{{fullData.credits.crew[1].job}} = </strong>= {{fullData.credits.crew[1].name}}, <strong>{{fullData.credits.crew[2].job}} = </strong> {{fullData.credits.crew[2].name}}, <strong>{{fullData.credits.crew[3].job}} = </strong> {{fullData.credits.crew[3].name}}, <strong>{{fullData.credits.crew[4].job}} = </strong>{{fullData.credits.crew[4].name}}, <strong>{{fullData.credits.crew[5].job}} = </strong> {{fullData.credits.crew[5].name}}</li>
+				    <li><span>Crew: </span><strong>{{fullData.credits.crew[0].job}} </strong>{{fullData.credits.crew[0].name}} <strong>{{fullData.credits.crew[1].job}} </strong> {{fullData.credits.crew[1].name}} <strong>{{fullData.credits.crew[2].job}} </strong> {{fullData.credits.crew[2].name}} <strong>{{fullData.credits.crew[3].job}} </strong> {{fullData.credits.crew[3].name}} <strong>{{fullData.credits.crew[4].job}}  </strong>{{fullData.credits.crew[4].name}} <strong>{{fullData.credits.crew[5].job}}  </strong> {{fullData.credits.crew[5].name}}</li>
 				    <li><span>Cast: </span><div id="credits" ng-repeat="credit in fullData.credits.cast">{{credit.name}}, </div></li>
 				    <li><span>Overview: </span>{{movies.overview}}</li>
 				    <li><span>Language: </span>{{movies.original_language}}</li>
@@ -38,7 +38,7 @@
 				    
 			    </ul>
 			    <br>
-			    <div ng-repeat="movies in moviesData">
+			    <div>
 				  <a class="links" href="https://www.youtube.com/results?search_query={{movies.original_title}}" target="_blank">Watch Trailers!</a>
 				  |<a class="links" href="https://subscene.com/subtitles/title?q={{movies.original_title}}&l=" target="_blank">Get Subtitles!</a>
 				  |<a class="links" href="http://www.amazon.in/s/ref=nb_sb_noss_1?url=search-alias%3Ddvd&field-keywords={{movies.original_title}}" target="_blank">Buy Online!</a>
@@ -47,10 +47,10 @@
 			<div class="no-results" ng-if="movies.Response==='False'">
 			<h4>No results found!</h4>
 		    </div>
-			<div class="col-sm-2 movie-details" ng-if="relatedMovies.Response==='True'">
+			<div class="col-sm-2 movie-details">
 			    <span>Related Research: </span><br>
 				<ul class="reated">
-					<li ng-repeat="film in relatedMovies.Search" ng-click="update(film)"><a href="#">{{film.Title}}</a>, {{film.Year}}</li>
+					<li ng-repeat="film in relatedMovies" ng-click="update(film)"><a href="#">{{film.original_title}}</a></li>
 				</ul>
 			</div>
 		</div>
