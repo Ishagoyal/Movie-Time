@@ -59,27 +59,23 @@
 
 	});
 
-	app.controller('reviewController', function ($scope) {
+	app.controller('reviewController', function ($scope, $window, $http) {
 		// body...
-		$scope.reviews = [];
-		$scope.review = {};
+        // $http({
+        // 	url: 'data.txt',
+        //     dataType: 'json',
+        //     method: 'POST',
+        //     data: '',
+        //     headers: {
+        //     "Content-Type": "application/json"
+        //     }
+        // })
+        $http.get('data.txt')
+        .then(function (response) {
+        	// body...
+        	$scope.reviews=response.data;
+        });
 
-
-		        $scope.addReview = function () {
-
-		        	$scope.review.createdOn = Date.now();
-		        	// body...
-		        	$scope.reviews.push({
-		        						 userName: $scope.review.userName,		
-		    		        			 stars: $scope.review.stars,
-		    		        			 message: $scope.review.message,
-		        						 email: $scope.review.email,
-		        						});
-		        	$scope.review = {};
-		        };
 	});
-
-               
-
-
+            
 })();

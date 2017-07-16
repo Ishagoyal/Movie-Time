@@ -3,7 +3,7 @@
 <head>
 	<title>Movie Review</title>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
-	<link href='https://fonts.googleapis.com/css?family=Architects+Daughter' rel='stylesheet' type='text/css'>
+	<link href='https://fonts.googleapis.com/css?family=Montserrat' rel='stylesheet' type='text/css'>
  	<link rel="stylesheet" type="text/css" href="movieReview.css">
 	<script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"></script>
   	<script src="movieReview.js"></script>
@@ -60,7 +60,6 @@
     <div ng-controller="reviewController">
     <div id="movie-reviews" class="row">
     	<div class="col-sm-8" ng-repeat="review in reviews">
-    	<div ng-if="movies.imdbID === review.id">
     	<a name="Movie Reviews"></a>
     	<h4>Reviews</h4>
     	<span>User Name: {{review.userName}}</span><br>
